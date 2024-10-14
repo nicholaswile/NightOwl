@@ -84,7 +84,7 @@ yield {
 
 ## Contributors
 * Nicholas Wile
-<!--
 * Aidan Mitchell
+<!--
 * Afifa Jinan
 --->
