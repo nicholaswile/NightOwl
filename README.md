@@ -1,6 +1,46 @@
 # NightOwl
 24/7 AI Student Assistant for KSU. This web crawler scrapes pages on the kennesaw.edu domain to create a dataset of documents for use in developing a language model to answer questions and summarize results relevant to users of the KSU website. 
 
+## Results so far:
+After scraping 4000 pages on the kennesaw.edu domain, we've created a dataset consisting of millions of words. The words of highest frequency are listed below. Frequencies will be updated as more documents are scraped and processed.
+
+```bash
+Total words: 1898336   
+Total documents: 4047  
+Avg words per page: 469
+
+30 most occurring words:
+ 1. students    : 26673
+ 2. faculty     : 18891
+ 3. ksu         : 18706
+ 4. kennesaw    : 17565
+ 5. resources   : 15657
+ 6. campus      : 14955
+ 7. university  : 14950
+ 8. student     : 14844
+ 9. state       : 13374
+10. alumni      : 13330
+11. research    : 11986
+12. business    : 11527
+13. community   : 11458
+14. staff       : 11262
+15. online      : 11079
+16. information : 11063
+17. education   : 10002
+18. family      :  9572
+19. current     :  9479
+20. marietta    :  9430
+21. friends     :  8798
+22. parents     :  8639
+23. 2024        :  8417
+24. ga          :  8131
+25. contact     :  7799
+26. programs    :  7679
+27. college     :  7061
+28. visit       :  6524
+29. apply       :  6314
+30. financial   :  6258
+```
 ## How to run:
 
 Clone this repository. If you haven't already, it is advised you create a virtual machine, and install the requirements for this project. You can do this by running
@@ -16,9 +56,19 @@ $ scrapy crawl -O ksudocs.json:json kennesaw_spider
 
 The output of the crawler will be displayed in the json file. To create a new json file, specify it on the command line.
 
+### Creating a vocabulary
+
+After creating the JSON file, you may create a vocabulary using the **clean.py** file in the **NightOwl** folder. Specify the desired file to clean and create a vocabulary for in the **clean.py** script, and run:
+
+```bash
+$ python clean.py
+```
+
+The script will output the vocabulary. You may edit the script to save data and use it how you like.
+
 ### Where's my data?
 
-The results are stored in **ksucrawler/ksucrawler/spiders/ksudocs.json**, or whichever name you chose for your json file.
+The results from **crawler.py** are stored in **ksucrawler/ksucrawler/spiders/ksudocs.json**, or whichever name you chose for your json file.
 
 ## How to modify:
 
