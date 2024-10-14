@@ -26,7 +26,7 @@ class Ksucrawler(scrapy.Spider):
         "SCHEDULER_MEMORY_QUEUE" : "scrapy.squeues.FifoMemoryQueue",
 
         # TODO: Number of pages to fetch before terminating crawler (should be increased after testing is done)
-        "CLOSESPIDER_PAGECOUNT" : 10,
+        # "CLOSESPIDER_PAGECOUNT" : 10,
     }
 
     # TODO: Add URLs if needed
