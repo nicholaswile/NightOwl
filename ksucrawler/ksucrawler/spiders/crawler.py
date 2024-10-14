@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import hashlib # Generate Unique Doc IDs from URLs
 import scrapy
 
+from scrapy.spiders import  Rule
+from scrapy.linkextractors import LinkExtractor
+
 
 class Ksucrawler(scrapy.Spider):
     name = "kennesaw_spider"
@@ -28,8 +31,14 @@ class Ksucrawler(scrapy.Spider):
 
     # TODO: Add URLs if needed
     start_urls = [
-        "https://www.kennesaw.edu/"
+        "https://www.kennesaw.edu/",
+        'https://www.kennesaw.edu/faculty-staff/'
     ]
+
+    # Define the rules for the spider
+    rules = (
+        Rule(LinkExtractor(allow=(), deny=(), unique=True), callback='parse_items', follow=True),
+    )
 
     def start_requests(self):
         for url in self.start_urls:
@@ -51,6 +60,7 @@ class Ksucrawler(scrapy.Spider):
         emails and phone numbers.
         '''
 
+        # Return results
         yield { 
             "pageid" : hashlib.md5(response.url.encode()).hexdigest(),
             "url" : response.url,
@@ -59,7 +69,6 @@ class Ksucrawler(scrapy.Spider):
             # TODO: additional document contents to extract, if wanted
         }
 
-        # TODO: Do we want to include XML links? Right now we exclude them.
-        for href in response.css("a::attr(href)").getall():
-            if not href.endswith(".xml"):
-                yield response.follow(href, self.parse)
+        # Iterate through links
+        for link in LinkExtractor(allow=()).extract_links(response):
+            yield scrapy.Request(link.url, callback=self.parse, priority=1)
