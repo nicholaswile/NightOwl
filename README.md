@@ -58,6 +58,7 @@ The script will output the vocabulary and cleaned text, which can be submitted a
 ### Where's my data?
 
 The results from **crawler.py** are stored in **ksucrawler/ksucrawler/spiders/ksudocs.json**, or whichever name you chose for your json file.
+The results from **crawler.py** are stored in **ksucrawler/ksucrawler/spiders/ksudocs.json**, or whichever name you chose for your json file.
 
 ## How to modify:
 
@@ -80,6 +81,8 @@ custom_settings = {
     "SCHEDULER_DISK_QUEUE" : "scrapy.squeues.PickleFifoDiskQueue",
     "SCHEDULER_MEMORY_QUEUE" : "scrapy.squeues.FifoMemoryQueue",
 
+    # Number of pages to fetch before terminating crawler (should be increased after testing is done)
+    # "CLOSESPIDER_PAGECOUNT" : 10,
     # Number of pages to fetch before terminating crawler (should be increased after testing is done)
     # "CLOSESPIDER_PAGECOUNT" : 10,
 }
